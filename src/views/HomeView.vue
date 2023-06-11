@@ -13,21 +13,7 @@ export default {
       baseUrl: import.meta.env.VITE_API_BASE_URL,
     };
   },
-  async mounted() {
-    try {
-      const response = await axios.get(`${this.baseUrl}comics`, {
-        params: {
-          ts: 1,
-          apikey: import.meta.env.VITE_API_PUBLIC_KEY,
-          hash: import.meta.env.VITE_API_HASH,
-        },
-      });
-      this.data = response.data.data.results;
-      console.log(this.data);
-    } catch (error) {
-      console.log(error);
-    }
-  },
+  async mounted() {},
 };
 </script>
 
