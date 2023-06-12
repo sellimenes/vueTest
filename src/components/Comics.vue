@@ -2,42 +2,30 @@
 import axios from "axios";
 import { onMounted, ref } from "vue";
 
-const comicsData = ref(null);
-const loading = ref(true);
-const baseUrl = import.meta.env.VITE_API_BASE_URL;
-const itemsPerRow = 7;
+const { vertical, data, title } = defineProps({
+  vertical: Boolean,
+  data: Object,
+  title: String,
+});
 
-const getComicsData = async () => {
-  loading.value = true;
-  try {
-    const response = await axios.get(`${baseUrl}comics`, {
-      params: {
-        ts: 1,
-        apikey: import.meta.env.VITE_API_PUBLIC_KEY,
-        hash: import.meta.env.VITE_API_HASH,
-        limit: itemsPerRow,
-      },
-    });
-    comicsData.value = response.data.data.results;
-  } catch (error) {
-    console.log(error);
-  } finally {
-    loading.value = false;
+const getComicImageSrc = (comic) => {
+  if (vertical) {
+    return `${comic.thumbnail.path}/portrait_fantastic.${comic.thumbnail.extension}`;
+  } else {
+    return `${comic.thumbnail.path}/landscape_large.${comic.thumbnail.extension}`;
   }
 };
-
-onMounted(() => {
-  getComicsData();
-});
 </script>
 
 <template>
   <section class="comicsWrapper">
-    <h2 class="listTitle">ÖNE ÇIKANLAR</h2>
+    <h2 class="listTitle" :class="{ uppercase: vertical }">
+      {{ title }}
+    </h2>
     <div class="cardsWrapper">
-      <div v-for="comic in comicsData" :key="comic.id" class="comicsCard">
+      <div v-for="comic in data" :key="comic.id" class="comicsCard">
         <img
-          :src="`${comic.thumbnail.path}.${comic.thumbnail.extension}`"
+          :src="getComicImageSrc(comic)"
           :alt="comic.title"
           class="comicImage"
         />
@@ -48,13 +36,18 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
+.uppercase {
+  text-transform: uppercase !important;
+}
+
 .comicsWrapper {
   margin: 1rem;
+  margin-bottom: 3rem;
 
   .listTitle {
-    font-size: 2.25rem;
     margin-bottom: 0.5rem;
     color: white;
+    text-transform: capitalize;
   }
 
   .cardsWrapper {

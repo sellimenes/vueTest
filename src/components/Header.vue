@@ -76,7 +76,7 @@ onMounted(() => {
 <style lang="scss">
 header {
   width: 100%;
-  max-height: 600px;
+  max-height: 300px;
   overflow: hidden;
   position: relative;
 
