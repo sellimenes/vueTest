@@ -7,8 +7,6 @@ const headerComicData = ref(null);
 const loading = ref(true);
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
-console.log(baseUrl);
-
 const getComicsData = async () => {
   loading.value = true;
   try {

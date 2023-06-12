@@ -3,6 +3,7 @@ import axios from "axios";
 import { onMounted, ref } from "vue";
 
 import Header from "@/components/Header.vue";
+import Comics from "../components/Comics.vue";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const data = ref(null);
@@ -11,16 +12,8 @@ const data = ref(null);
 <template>
   <main>
     <Header />
-    <h1>Home</h1>
+    <Comics />
   </main>
 </template>
 
-<style lang="scss">
-body {
-  background-color: red;
-
-  main {
-    background-color: blue;
-  }
-}
-</style>
+<style lang="scss"></style>
