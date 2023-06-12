@@ -1,20 +1,11 @@
-<script>
+<script setup>
 import axios from "axios";
+import { onMounted, ref } from "vue";
 
 import Header from "@/components/Header.vue";
 
-export default {
-  components: {
-    Header,
-  },
-  data() {
-    return {
-      data: null,
-      baseUrl: import.meta.env.VITE_API_BASE_URL,
-    };
-  },
-  async mounted() {},
-};
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
+const data = ref(null);
 </script>
 
 <template>

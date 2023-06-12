@@ -1,36 +1,38 @@
-<script>
+<script setup>
 import axios from "axios";
-export default {
-  data() {
-    return {
-      comicsData: null,
-      headerComicData: null,
-      loading: true,
-      baseUrl: import.meta.env.VITE_API_BASE_URL,
-    };
-  },
-  async mounted() {
-    try {
-      this.loading = true;
-      const response = await axios.get(`${this.baseUrl}comics`, {
-        params: {
-          ts: 1,
-          apikey: import.meta.env.VITE_API_PUBLIC_KEY,
-          hash: import.meta.env.VITE_API_HASH,
-          limit: 10,
-        },
-      });
-      this.comicsData = response.data.data.results;
-      this.headerComicData =
-        this.comicsData[Math.floor(Math.random() * this.comicsData.length)];
-      console.log(this.headerComicData);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      this.loading = false;
-    }
-  },
+import { onMounted, ref } from "vue";
+
+const comicsData = ref(null);
+const headerComicData = ref(null);
+const loading = ref(true);
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
+
+console.log(baseUrl);
+
+const getComicsData = async () => {
+  loading.value = true;
+  try {
+    const response = await axios.get(`${baseUrl}comics`, {
+      params: {
+        ts: 1,
+        apikey: import.meta.env.VITE_API_PUBLIC_KEY,
+        hash: import.meta.env.VITE_API_HASH,
+        limit: 10,
+      },
+    });
+    comicsData.value = response.data.data.results;
+    headerComicData.value =
+      comicsData.value[Math.floor(Math.random() * comicsData.value.length)];
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading.value = false;
+  }
 };
+
+onMounted(() => {
+  getComicsData();
+});
 </script>
 
 <template>
