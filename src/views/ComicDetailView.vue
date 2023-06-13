@@ -22,7 +22,6 @@ const getSingleComic = async (id) => {
       },
     });
     comicData.value = response.data.data.results;
-    console.log(comicData.value);
   } catch (error) {
     console.log(error);
   } finally {

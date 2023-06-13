@@ -19,7 +19,6 @@ const getComicImageSrc = (comic) => {
 
 const handleLike = () => {
   store.commit("increment");
-  console.log("cliekd");
 };
 </script>
 
