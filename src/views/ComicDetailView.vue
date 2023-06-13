@@ -1,7 +1,11 @@
 <script setup>
 import axios from "axios";
 import { onMounted, ref } from "vue";
+import { useStore } from "vuex";
 
+import Header from "../components/Header.vue";
+
+const store = useStore();
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const loading = ref(true);
 const comicData = ref(null);
@@ -25,6 +29,10 @@ const getSingleComic = async (id) => {
   }
 };
 
+const handleLike = () => {
+  store.commit("increment");
+};
+
 onMounted(() => {
   getSingleComic(window.location.pathname.split("/").reverse()[0]);
 });
@@ -32,60 +40,63 @@ onMounted(() => {
 
 <template>
   <div v-if="loading">Loading...</div>
-  <section v-else class="comicDetailWrapper">
-    <div class="comicDetails">
-      <a href="/">Back</a>
-      <div class="comicDetail">
-        <img
-          :src="`${comicData[0].thumbnail.path}/portrait_uncanny.${comicData[0].thumbnail.extension}`"
-          :alt="comicData[0].title"
-          class="comicDetailImage"
-        />
-        <div class="comicDetailInfo">
-          <h2 class="comicDetailTitle">{{ comicData[0].title }}</h2>
-          <p class="comicDetailDescription">
-            {{ comicData[0].description || "No description" }}
-          </p>
-          <div class="comicDetailCharacters">
-            <h3>Characters</h3>
-            <div class="comicDetailCharactersWrapper">
-              <p v-if="comicData[0].characters.items.length === 0">
-                No character info.
-              </p>
-              <a
-                v-else
-                v-for="character in comicData[0].characters.items"
-                target="_blank"
-                :key="character.resourceURI"
-                :href="character.resourceURI"
-                class="comicDetailCharacter"
-              >
-                {{ character.name }}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  height="800px"
-                  width="800px"
-                  version="1.1"
-                  id="Capa_1"
-                  viewBox="0 0 26 26"
-                  xml:space="preserve"
+  <section v-else>
+    <Header />
+    <div class="comicDetailWrapper">
+      <div class="comicDetails">
+        <a href="/">Back</a>
+        <div class="comicDetail">
+          <img
+            :src="`${comicData[0].thumbnail.path}/portrait_uncanny.${comicData[0].thumbnail.extension}`"
+            :alt="comicData[0].title"
+            class="comicDetailImage"
+          />
+          <div class="comicDetailInfo">
+            <h2 class="comicDetailTitle">{{ comicData[0].title }}</h2>
+            <p class="comicDetailDescription">
+              {{ comicData[0].description || "No description" }}
+            </p>
+            <div class="comicDetailCharacters">
+              <h3>Characters</h3>
+              <div class="comicDetailCharactersWrapper">
+                <p v-if="comicData[0].characters.items.length === 0">
+                  No character info.
+                </p>
+                <a
+                  v-else
+                  v-for="character in comicData[0].characters.items"
+                  target="_blank"
+                  :key="character.resourceURI"
+                  :href="character.resourceURI"
+                  class="comicDetailCharacter"
                 >
-                  <g>
-                    <path
-                      d="M18,17.759v3.366C18,22.159,17.159,23,16.125,23H4.875C3.841,23,3,22.159,3,21.125V9.875   C3,8.841,3.841,8,4.875,8h3.429l3.001-3h-6.43C2.182,5,0,7.182,0,9.875v11.25C0,23.818,2.182,26,4.875,26h11.25   C18.818,26,21,23.818,21,21.125v-6.367L18,17.759z"
-                    />
+                  {{ character.name }}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    height="800px"
+                    width="800px"
+                    version="1.1"
+                    id="Capa_1"
+                    viewBox="0 0 26 26"
+                    xml:space="preserve"
+                  >
                     <g>
                       <path
-                        d="M22.581,0H12.322c-1.886,0.002-1.755,0.51-0.76,1.504l3.22,3.22l-5.52,5.519    c-1.145,1.144-1.144,2.998,0,4.141l2.41,2.411c1.144,1.141,2.996,1.142,4.14-0.001l5.52-5.52l3.16,3.16    c1.101,1.1,1.507,1.129,1.507-0.757L26,3.419C25.999-0.018,26.024-0.001,22.581,0z"
+                        d="M18,17.759v3.366C18,22.159,17.159,23,16.125,23H4.875C3.841,23,3,22.159,3,21.125V9.875   C3,8.841,3.841,8,4.875,8h3.429l3.001-3h-6.43C2.182,5,0,7.182,0,9.875v11.25C0,23.818,2.182,26,4.875,26h11.25   C18.818,26,21,23.818,21,21.125v-6.367L18,17.759z"
                       />
+                      <g>
+                        <path
+                          d="M22.581,0H12.322c-1.886,0.002-1.755,0.51-0.76,1.504l3.22,3.22l-5.52,5.519    c-1.145,1.144-1.144,2.998,0,4.141l2.41,2.411c1.144,1.141,2.996,1.142,4.14-0.001l5.52-5.52l3.16,3.16    c1.101,1.1,1.507,1.129,1.507-0.757L26,3.419C25.999-0.018,26.024-0.001,22.581,0z"
+                        />
+                      </g>
                     </g>
-                  </g>
-                </svg>
-              </a>
+                  </svg>
+                </a>
+              </div>
             </div>
+            <div class="likeBtn" @click="handleLike">Like</div>
           </div>
-          <div class="likeBtn">Like</div>
         </div>
       </div>
     </div>
