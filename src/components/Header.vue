@@ -3,6 +3,8 @@ import axios from "axios";
 import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
 
+import Loading from "./Loading.vue";
+
 const store = useStore();
 
 const comicsData = ref(null);
@@ -38,9 +40,9 @@ onMounted(() => {
 
 <template>
   <div>
-    <template v-if="loading">
-      <p>Loading...</p>
-    </template>
+    <div v-if="loading" class="loading">
+      <Loading />
+    </div>
     <template v-else-if="headerComicData">
       <div @click="handleLike">Like</div>
       <header>
@@ -51,11 +53,13 @@ onMounted(() => {
         />
         <div class="imageOverlay" />
         <div class="navWrapper">
-          <img
-            class="headerLogo"
-            src="../assets/header_logo.png"
-            alt="marvel logo"
-          />
+          <a href="/">
+            <img
+              class="headerLogo"
+              src="../assets/header_logo.png"
+              alt="marvel logo"
+            />
+          </a>
           <div class="favoriteIcon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -81,6 +85,13 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 header {
   width: 100%;
   max-height: 300px;

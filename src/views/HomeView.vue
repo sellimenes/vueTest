@@ -4,6 +4,7 @@ import { onMounted, ref } from "vue";
 
 import Header from "@/components/Header.vue";
 import Comics from "../components/Comics.vue";
+import Loading from "../components/Loading.vue";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const loading = ref(true);
@@ -83,7 +84,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div v-if="loading" class="loadingWrapper">Loading...</div>
+  <div v-if="loading" class="loading"><Loading /></div>
   <main v-else>
     <Header />
     <Comics :vertical="true" title="Featured" :data="featuredData" />
@@ -93,8 +94,11 @@ onMounted(async () => {
 </template>
 
 <style lang="scss">
-.loadingWrapper {
-  color: white;
-  font-size: 2rem;
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
 }
 </style>

@@ -4,6 +4,7 @@ import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
 
 import Header from "../components/Header.vue";
+import Loading from "../components/Loading.vue";
 
 const store = useStore();
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
@@ -40,12 +41,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="loading">Loading...</div>
+  <div v-if="loading" class="loading"><Loading /></div>
   <section v-else>
     <Header />
     <div class="comicDetailWrapper">
       <div class="comicDetails">
-        <a href="/">Back</a>
+        <!-- <a href="/">Back</a> -->
         <div class="comicDetail">
           <img
             :src="`${comicData[0].thumbnail.path}/portrait_uncanny.${comicData[0].thumbnail.extension}`"
@@ -144,6 +145,16 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  font-size: 3rem;
+  color: white;
+}
+
 .comicDetailWrapper {
   display: flex;
   justify-content: center;
