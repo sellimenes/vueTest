@@ -86,13 +86,9 @@ onMounted(async () => {
   <div v-if="loading" class="loadingWrapper">Loading...</div>
   <main v-else>
     <Header />
-    <Comics :vertical="true" title="Öne Çıkanlar" :data="featuredData" />
-    <Comics :vertical="false" title="Yeni Çıkanlar" :data="newsData" />
-    <Comics
-      :vertical="false"
-      title="En Çok İzlenenler"
-      :data="mostWatchedData"
-    />
+    <Comics :vertical="true" title="Featured" :data="featuredData" />
+    <Comics :vertical="false" title="New" :data="newsData" />
+    <Comics :vertical="false" title="Most Wanted" :data="mostWatchedData" />
   </main>
 </template>
 

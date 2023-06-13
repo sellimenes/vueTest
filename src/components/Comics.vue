@@ -23,14 +23,19 @@ const getComicImageSrc = (comic) => {
       {{ title }}
     </h2>
     <div class="cardsWrapper">
-      <div v-for="comic in data" :key="comic.id" class="comicsCard">
+      <a
+        v-for="comic in data"
+        :key="comic.id"
+        :href="comic.id"
+        class="comicsCard"
+      >
         <img
           :src="getComicImageSrc(comic)"
           :alt="comic.title"
           class="comicImage"
         />
         <h3>{{ comic.title }}</h3>
-      </div>
+      </a>
     </div>
   </section>
 </template>
@@ -43,6 +48,11 @@ const getComicImageSrc = (comic) => {
 .comicsWrapper {
   margin: 1rem;
   margin-bottom: 3rem;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 
   .listTitle {
     margin-bottom: 0.5rem;
