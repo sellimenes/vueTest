@@ -1,29 +1,18 @@
-# .
 
-This template should help get you started developing with Vue 3 in Vite.
+# Vue.js Mülakat Sorusu
 
-## Recommended IDE Setup
+Linktekine benzer bir formatta Marvel API ile website tasarlanacak.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+2 adet sayfa talep edilmekte. İlk sayfada, Marvel API ile Comics başlığındaki veriler index arayüzünde sergilenmesi, 2. sayfada ise seçilen Comic verisinin detayları görüntülenmesi gerekmektedir.
 
-## Customize configuration
+Ayrıca Like butonuna tıklandığında Header alanında bulunan badge üzerindeki sayısı artıracak. Bunun için Vuex kullanılması gerekmektedir.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Son olarak, tasarım için SASS kullanılması tercih edilmektedir.
 
-## Project Setup
+<img width="1470" alt="image" src="https://github.com/sellimenes/vueTest/assets/23125375/7adb8a71-b7c0-4b59-b588-b5d66f98d9e6">
+Demo linki: https://vue-test-sellimenes.vercel.app
 
-```sh
-npm install
-```
 
-### Compile and Hot-Reload for Development
 
-```sh
-npm run dev
-```
+** Link: https://somanath-goudar.github.io/html-css-projects/netflix-clone/
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
