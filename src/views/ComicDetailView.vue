@@ -26,7 +26,7 @@ const getSingleComic = async (id) => {
 };
 
 onMounted(() => {
-  getSingleComic(window.location.pathname.split("/")[1]);
+  getSingleComic(window.location.pathname.split("/").reverse()[0]);
 });
 </script>
 
