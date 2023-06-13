@@ -34,6 +34,7 @@ const handleLike = () => {
 };
 
 onMounted(() => {
+  document.title = "Comic Detail";
   // Params üzerinden alınabilir.
   getSingleComic(window.location.pathname.split("/").reverse()[0]);
 });

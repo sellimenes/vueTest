@@ -77,6 +77,7 @@ const getMostWatched = async () => {
 
 onMounted(async () => {
   loading.value = true;
+  document.title = "Marvel Comics";
   await getFeaturedData();
   await getNewsData();
   await getMostWatched();
